@@ -1,6 +1,8 @@
 package capers;
 
 import java.io.File;
+import java.io.IOException;
+
 import static capers.Utils.*;
 
 /** A repository for Capers 
@@ -46,6 +48,14 @@ public class CapersRepository {
         setupPersistence();
 
         File story= Utils.join(CAPERS_FOLDER, "story.txt");
+
+
+        try {
+            story.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         Utils.writeContents(story,readContents(story),text,"\n");
 
         System.out.println(readContentsAsString(story));
